@@ -10,6 +10,10 @@ $jwksPath = "./well-known/jwks.json"
 $privateKeyPath = "./keys/private_key.pem"
 $publicKeyPath = "./keys/public_key.pem"
 
+# Ensure output directories exist
+New-Item -ItemType Directory -Force -Path "./well-known"
+New-Item -ItemType Directory -Force -Path "./keys"
+
 # Generate RSA key pair (2048-bit key size)
 $rsa = [System.Security.Cryptography.RSA]::Create(2048)
 
