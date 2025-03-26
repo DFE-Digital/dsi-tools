@@ -10,6 +10,10 @@ $jwksPath = "./well-known/jwks.json"
 $privateKeyPath = "./keys/private_key.pem"
 $publicKeyPath = "./keys/public_key.pem"
 
+# Define 'age' variables
+$maxKeyAgeInDays = 30
+$secondsToDays = 86400
+
 # Ensure output directories exist
 New-Item -ItemType Directory -Force -Path "./well-known"
 New-Item -ItemType Directory -Force -Path "./keys"
@@ -52,6 +56,9 @@ $exponent = ConvertTo-Base64Url $rsaParams.Exponent
  $unixEpoch = [datetime]::UnixEpoch
  $currentUnixTime = [int64](([datetime]::UtcNow - $unixEpoch).TotalSeconds)
 
+ # Expiry date
+ $expiresUnixTime = $currentUnixTime + ($maxKeyAgeInDays * $secondsToDays)
+
  # Create a new key object
 $newKey = @{
     kty = "RSA"
@@ -60,7 +67,7 @@ $newKey = @{
     kid = [Guid]::NewGuid().ToString() # Generate unique key ID
     n = $modulus
     e = $exponent
-    ed = $currentUnixTime
+    ed = $expiresUnixTime
 }
 
 # If jwksPath exists, then append new key, otherwise create
