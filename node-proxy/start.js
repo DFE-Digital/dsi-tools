@@ -1,5 +1,11 @@
-const { createProxyServer } = require("./proxy");
-const ProxyRecorder = require("./proxyRecorder");
+const createProxyServer = require("./proxy");
 
-const proxyServer = createProxyServer(8080);
-new ProxyRecorder(proxyServer, 8081);
+const domainMappings = [
+  {
+    pattern: /^\/api\/v1\/.*$/,
+    targetDomain: "api.exmaple.com",
+    protocol: "https"
+  }
+]
+
+createProxyServer(8080, domainMappings);
