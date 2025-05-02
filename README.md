@@ -21,3 +21,13 @@ HttpClientHandler httpClientHandler = new HttpClientHandler()
 
 HttpClient client = new HttpClient(httpClientHandler);
 ```
+
+## Script: public-api/GenerateAuthorizationToken.ps1
+
+This script generates a bearer token for use with the DfE Sign-in Public API which takes the `clientId` and `apiSecret` of a service.
+
+Usage example:
+
+```pwsh
+./public-api/GenerateAuthorizationToken.ps1 -clientId "ExampleClient" -apiSecret "example-api-secret"
+```
