@@ -81,8 +81,7 @@ function MapUserSecret {
 
 function SetNodeApiUserSecrets {
     param(
-        [string]$apiName,
-        [string]$shortName
+        [string]$apiName
     )
 
     MapUserSecret "NodeApiClient:Apis:${apiName}:BaseAddress" "standaloneApplicationsHostName" "http://<secret>"
@@ -106,10 +105,10 @@ Write-Output "Setup: Public API..."
 $userSecretsId = "9cf57240-a4e9-44b7-8c09-922da90f69eb"
 MapUserSecret "Application:PublicKeysJson" "papiPublicKeysJson"
 SetUserSecret "BearerToken:ValidAudience" "signin.education.gov.uk"
-SetNodeApiUserSecrets "Organisations" "org"
-SetNodeApiUserSecrets "Directories" "dir"
-SetNodeApiUserSecrets "Applications" "app"
-SetNodeApiUserSecrets "Access" "acc"
+SetNodeApiUserSecrets "Organisations"
+SetNodeApiUserSecrets "Directories"
+SetNodeApiUserSecrets "Applications"
+SetNodeApiUserSecrets "Access"
 
 Write-Output "Setup: Select Organisation..."
 $userSecretsId = "9bc1d9ef-36ce-492e-876f-6d80fe79896c"
@@ -117,7 +116,7 @@ MapUserSecret "PublicApiSigning:PrivateKeyPem" "papiPrivKeyPem"
 MapUserSecret "PublicApiSigning:PublicKeyId" "papiPublicKeyId"
 MapUserSecret "PublicApiSigning:Algorithm" "papiAlgorithm"
 MapUserSecret "PublicApiSigning:Padding" "papiPadding"
-SetNodeApiUserSecrets "Organisations" "org"
-SetNodeApiUserSecrets "Directories" "dir"
-SetNodeApiUserSecrets "Applications" "app"
-SetNodeApiUserSecrets "Access" "acc"
+SetNodeApiUserSecrets "Organisations"
+SetNodeApiUserSecrets "Directories"
+SetNodeApiUserSecrets "Applications"
+SetNodeApiUserSecrets "Access"
