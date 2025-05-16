@@ -84,7 +84,7 @@ function SetNodeApiUserSecrets {
         [string]$apiName
     )
 
-    MapUserSecret "NodeApiClient:Apis:${apiName}:BaseAddress" "standaloneApplicationsHostName" "http://<secret>"
+    MapUserSecret "NodeApiClient:Apis:${apiName}:BaseAddress" "standalone${apiName}HostName" "http://<secret>"
     MapUserSecret "NodeApiClient:Apis:${apiName}:AuthenticatedHttpClientOptions:Tenant" "platformGlobalTenantDomain"
     MapUserSecret "NodeApiClient:Apis:${apiName}:AuthenticatedHttpClientOptions:Resource" "aadshdappid"
     MapUserSecret "NodeApiClient:Apis:${apiName}:AuthenticatedHttpClientOptions:HostUrl" "tenantUrl"
