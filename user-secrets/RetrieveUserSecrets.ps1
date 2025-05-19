@@ -84,7 +84,7 @@ function SetNodeApiUserSecrets {
         [string]$apiName
     )
 
-    MapUserSecret "NodeApiClient:Apis:${apiName}:BaseAddress" "standaloneApplicationsHostName" "http://<secret>"
+    MapUserSecret "NodeApiClient:Apis:${apiName}:BaseAddress" "standalone${apiName}HostName" "http://<secret>"
     MapUserSecret "NodeApiClient:Apis:${apiName}:AuthenticatedHttpClientOptions:Tenant" "platformGlobalTenantDomain"
     MapUserSecret "NodeApiClient:Apis:${apiName}:AuthenticatedHttpClientOptions:Resource" "aadshdappid"
     MapUserSecret "NodeApiClient:Apis:${apiName}:AuthenticatedHttpClientOptions:HostUrl" "tenantUrl"
@@ -103,7 +103,6 @@ function SetNodeApiUserSecrets {
 
 Write-Output "Setup: Public API..."
 $userSecretsId = "9cf57240-a4e9-44b7-8c09-922da90f69eb"
-MapUserSecret "Application:PublicKeysJson" "papiPublicKeysJson"
 SetUserSecret "BearerToken:ValidAudience" "signin.education.gov.uk"
 SetNodeApiUserSecrets "Organisations"
 SetNodeApiUserSecrets "Directories"
@@ -112,10 +111,6 @@ SetNodeApiUserSecrets "Access"
 
 Write-Output "Setup: Select Organisation..."
 $userSecretsId = "9bc1d9ef-36ce-492e-876f-6d80fe79896c"
-MapUserSecret "PublicApiSigning:PrivateKeyPem" "papiPrivKeyPem"
-MapUserSecret "PublicApiSigning:PublicKeyId" "papiPublicKeyId"
-MapUserSecret "PublicApiSigning:Algorithm" "papiAlgorithm"
-MapUserSecret "PublicApiSigning:Padding" "papiPadding"
 SetNodeApiUserSecrets "Organisations"
 SetNodeApiUserSecrets "Directories"
 SetNodeApiUserSecrets "Applications"
