@@ -38,14 +38,6 @@ Retrieve secrets to connect into the hosted development environments:
 ./user-secrets/RetrieveUserSecrets.ps1 -EnvId d01
 ```
 
-## Script: Generate fresh Public API keys for use locally
-
-This is useful when running components locally without connecting into a hosted development environment.
-
-```pwsh
-./user-secrets/GeneratePublicApiKeys.ps1
-```
-
 ## Script: Generate authorization bearer token for Public API
 
 This script generates a bearer token for use with the DfE Sign-in Public API which takes the `clientId` and `apiSecret` of a service.
