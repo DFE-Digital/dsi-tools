@@ -24,7 +24,7 @@ Since the public API is spread across two technologies (Node.js and .NET) it is 
 
 ## Script: Connecting to a development environment
 
-Ensure that the following secrets are set manually so that `RetrieveUserSecrets.ps` can connect to KeyVault to retrieve application specific configurations:
+Ensure that the following secrets are set manually so that `Import-Secrets` can import application secrets for a development envrionment:
 
 ```pwsh
 dotnet user-secrets set d01:TenantId "<secret>" --id login.dfe.dsi-config
@@ -32,18 +32,19 @@ dotnet user-secrets set d01:ApplicationId "<secret>" --id login.dfe.dsi-config
 dotnet user-secrets set d01:SecurePassword "<secret>" --id login.dfe.dsi-config
 ```
 
-Retrieve secrets to connect into the hosted development environments:
+Import secrets to connect to the hosted development environment:
 
 ```pwsh
-./user-secrets/RetrieveUserSecrets.ps1 -EnvId d01
+./user-secrets/Import-Secrets -EnvId d01
 ```
+
 
 ## Script: Generate authorization bearer token for Public API
 
-This script generates a bearer token for use with the DfE Sign-in Public API which takes the `clientId` and `apiSecret` of a service.
+This script generates a bearer token for use with the DfE Sign-in Public API which takes the `ClientId` and `ApiSecret` of a service.
 
 Usage example:
 
 ```pwsh
-./public-api/GenerateAuthorizationToken.ps1 -clientId "ExampleClient" -apiSecret "example-api-secret"
+./public-api/New-AuthorizationToken -ClientId "ExampleClient" -ApiSecret "example-api-secret"
 ```
