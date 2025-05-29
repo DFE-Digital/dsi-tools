@@ -22,10 +22,12 @@ function Set-DsiUserSecret {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]
-        [string]$Name,
+        [String]$Name,
         [Parameter(Mandatory=$true)]
-        [string]$Value
+        [String]$Value
     )
+
+    $ErrorActionPreference = "Stop"
 
     if (-not $global:DsiActiveUserSecretsId) {
         throw "Cannot set user secret because there is not an active project."

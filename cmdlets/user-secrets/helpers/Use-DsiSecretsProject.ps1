@@ -21,10 +21,12 @@ function Use-DsiSecretsProject {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]
-        [string]$Name,
+        [String]$Name,
         [Parameter(Mandatory=$true)]
-        [string]$Id
+        [String]$Id
     )
+
+    $ErrorActionPreference = "Stop"
 
     Write-Output "`nSet active project to '$Name'..."
 

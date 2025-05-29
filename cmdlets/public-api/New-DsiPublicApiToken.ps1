@@ -23,10 +23,10 @@ function New-DsiPublicApiToken {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]
-        [string]$ClientId,
+        [String]$ClientId,
         [Parameter(Mandatory=$true)]
-        [string]$ApiSecret,
-        [string]$Audience = "signin.education.gov.uk"
+        [String]$ApiSecret,
+        [String]$Audience = "signin.education.gov.uk"
     )
 
     function Normalize-HmacSha256Key {

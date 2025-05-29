@@ -13,7 +13,7 @@ Run the following script to ensure that the required tooling is installed and is
 The cmdlets module is added to the user PowerShell profile which means that the various commands that are presented in this README.md file can be used when starting a new PowerShell session.
 
 
-## Tip for developers working on the cmdlets
+## Developers: Tips for when working on the cmdlets
 
 It is useful to re-import the cmdlets module when editing on the cmdlets.
 
@@ -24,7 +24,7 @@ Import-Module -Name ./cmdlets/Module -Force
 ```
 
 
-## Connecting to the development environment
+## Developers: Connecting to the development environment
 
 Connect to (or switch to a different) the development environment:
 
@@ -40,6 +40,23 @@ Import secrets to connect to the hosted environment:
 Import-DsiSecrets
 ```
 
+Disconnect when you are finished:
+
+```pwsh
+Disconnect-DsiEnv
+```
+
+
+## Testers: Connecting to the development environment
+
+Connect to (or switch to a different) the development environment:
+
+```pwsh
+Connect-DsiEnv -Name DEV
+```
+
+Follow the on-screen instructions to connect with your Azure account.
+
 Import test data for the development environment:
 
 ```pwsh
@@ -50,6 +67,22 @@ Disconnect when you are finished:
 
 ```pwsh
 Disconnect-DsiEnv
+```
+
+Get the active test data path:
+
+```pwsh
+Get-DsiTestDataPath
+```
+
+
+## Testers: Submitting test data to the connected KeyVault
+
+Submit the local `private/TestData_ENV.json` file to the connected KeyVault:
+
+```pwsh
+Connect-DsiEnv -Name DEV
+Export-DsiTestDataToKeyVault
 ```
 
 

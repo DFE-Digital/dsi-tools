@@ -35,20 +35,17 @@ function Set-DsiUserSecretsFromKeyVault {
         [PSCustomObject[]]$Mappings
     )
 
+    $ErrorActionPreference = "Stop"
+
     if (-not $global:DsiActiveUserSecretsId) {
         throw "Cannot set user secret because there is not an active project."
     }
 
-    foreach ($mapping in $mappings) {
-        $value = $mapping.Value
-
-        $placeholderMatches = [regex]::Matches($value, "{{([^}]+?)}}")
-        foreach ($match in $placeholderMatches) {
-            $placeholderName = $match.Groups[1].Value
-            $keyVaultSubstitution = Get-DsiKeyVaultSecret -Name $placeholderName.Trim()
-            $value = $value -replace $match.Value, $keyVaultSubstitution
+    foreach ($mapping in $Mappings) {
+        $value = $mapping.Value -replace "{{([^}]+?)}}", {
+            $secretName = $_.Groups[1].Value.Trim()
+            return Get-DsiKeyVaultSecret -Name $secretName
         }
-
         Set-DsiUserSecret -Name $mapping.Name -Value $value
     }
 }

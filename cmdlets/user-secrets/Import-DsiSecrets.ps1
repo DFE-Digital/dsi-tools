@@ -19,7 +19,7 @@ function Import-DsiSecrets {
 
     $ErrorActionPreference = "Stop"
 
-    Test-DsiConnectedEnv
+    Test-DsiConnectedEnv > $null
 
 
     #----- Public API -------------------------------------------------------------------
@@ -51,35 +51,4 @@ function Import-DsiSecrets {
     Set-DsiApiConnectionUserSecrets -ApiName "Directories"
     Set-DsiApiConnectionUserSecrets -ApiName "Applications"
     Set-DsiApiConnectionUserSecrets -ApiName "Access"
-
-
-    #----- UI Tests ---------------------------------------------------------------------
-
-    Use-DsiSecretsProject `
-        -Name "UI Tests" `
-        -Id "74491194-d775-4d5f-973f-870ed02a95fc"
-
-    Set-DsiUserSecretsFromKeyVault -Mappings @(
-        @{
-            Name = "Platform:ServicesBaseAddress"
-            Value = "https://{{ standaloneServicesHostName }}"
-        }
-        @{
-            Name = "Platform:ProfileBaseAddress"
-            Value = "https://{{ standaloneProfileHostName }}"
-        }
-        @{
-            Name = "Platform:ManageBaseAddress"
-            Value = "https://{{ standaloneManageHostName }}"
-        }
-        @{
-            Name = "Platform:InteractionsBaseAddress"
-            Value = "https://{{ standaloneInteractionsHostName }}"
-        }
-        @{
-            Name = "Platform:PublicApiBaseAddress"
-            Value = "https://{{ standalonePublicApiHostName }}"
-        }
-    )
-
 }

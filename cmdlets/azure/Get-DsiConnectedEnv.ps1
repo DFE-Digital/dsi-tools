@@ -4,7 +4,7 @@ function Get-DsiConnectedEnv {
         Identifies the current DfE Sign-in environment.
 
     .OUTPUTS
-        Metadata for the current connection with the following properties:
+        Metadata for the connected environment:
             - Name - The name of the environment (eg. "DEV").
             - Subscription - The name of the associated subscription.
             - Prefix - The resource prefix.

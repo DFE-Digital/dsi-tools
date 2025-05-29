@@ -7,6 +7,8 @@ function Start-DsiPublicApiProxy {
         This is useful for developers working with the Public API where some endpoints
         are hosted whilst some endpoints are being ran locally.
 
+        The proxy runs on http://localhost:5086
+
     .OUTPUTS
         None.
 

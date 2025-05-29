@@ -22,7 +22,7 @@ function Connect-DsiEnv {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]
-        [string]$Name
+        [String]$Name
     )
 
     $global:DsiConnectedEnv = $null

@@ -6,28 +6,21 @@ function Clear-DsiSecrets {
     .NOTES
         This command clears ALL user secrets for all projects.
 
-    .PARAMETER Confirm
-        Specify any of the following values to confirm (not case sensitive):
-            - 1
-            - "y"
-            - "yes"
-            - "true"
+        This command requires user confirmation.
 
     .EXAMPLE
         PS> Clear-DsiSecrets
-        Confirm: y
+        Clear user secrets for DfE Sign-in projects? [y/n]: y
 #>
     [CmdletBinding()]
-    param (
-        [Parameter(Mandatory=$true)]
-        [string]$Confirm
-    )
+    param ()
 
     $ErrorActionPreference = "Stop"
 
-    if ($Confirm.ToLower() -notmatch "^(1|true|yes|y)$") {
+    $reply = Read-Host -Prompt "Clear user secrets for DfE Sign-in projects? [y/n]"
+    if ($reply.ToLower() -ne "y") {
         Write-Output "Cancelled."
-        return;
+        return
     }
 
     $projects = @(
@@ -45,10 +38,14 @@ function Clear-DsiSecrets {
         }
     )
 
+    Write-Output "Clearing secrets..."
     foreach ($project in $projects) {
-        Write-Output "Clearing secrets for '$($project.Name)'..."
+        Write-Output "   for '$($project.Name)'..."
         dotnet user-secrets clear --id "$($project.Id)"
     }
+
+    Write-Output "Clearing test data..."
+    Remove-Item -Path "$PSScriptRoot/../../private/TestData*.json" -Confirm
 
     Write-Output "Completed."
 }

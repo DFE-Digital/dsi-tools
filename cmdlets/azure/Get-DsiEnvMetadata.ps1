@@ -12,7 +12,7 @@ function Get-DsiEnvMetadata {
             - PROD
 
     .OUTPUTS
-        Details of the environment including:
+        Metadata for the environment:
             - Name - The name of the environment (eg. "DEV").
             - Subscription - The name of the associated subscription.
             - Prefix - The resource prefix.
@@ -26,7 +26,7 @@ function Get-DsiEnvMetadata {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]
-        [string]$Name
+        [String]$Name
     )
 
     $mappings = @{

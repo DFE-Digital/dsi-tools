@@ -4,7 +4,7 @@ function Get-DsiKeyVaultSecret {
         Gets a secret from the connected KeyVault.
 
     .PARAMETER Name
-        Name of secret in the active KeyVault.
+        Name of the secret.
 
     .OUTPUTS
         The secret value.
@@ -15,10 +15,10 @@ function Get-DsiKeyVaultSecret {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]
-        [string]$Name
+        [String]$Name
     )
 
-    Test-DsiConnectedEnv
+    Test-DsiConnectedEnv > $null
 
     $secret = Get-AzKeyVaultSecret `
         -VaultName $global:DsiConnectedEnv.KeyVault `

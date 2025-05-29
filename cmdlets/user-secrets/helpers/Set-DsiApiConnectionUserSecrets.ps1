@@ -16,8 +16,10 @@ function Set-DsiApiConnectionUserSecrets {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]
-        [string]$ApiName
+        [String]$ApiName
     )
+
+    $ErrorActionPreference = "Stop"
 
     Set-DsiUserSecretsFromKeyVault -Mappings @(
         @{
