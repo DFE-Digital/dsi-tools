@@ -26,7 +26,12 @@ else {
 
 
 # Import cmdlet module when a PowerShell session is started.
-$profilePath = "~/.config/powershell/Microsoft.PowerShell_profile.ps1"
+if ($IsMacOS) {
+    $profilePath = "~/.config/powershell/Microsoft.PowerShell_profile.ps1"
+}
+else {
+    $profilePath = "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+}
 $profileContent = ""
 if (Test-Path -Path $profilePath) {
     $profileContent = Get-Content -Path $profilePath | Out-String

@@ -32,7 +32,7 @@ function Import-DsiTestData {
         -Name "UI Tests" `
         -Id "74491194-d775-4d5f-973f-870ed02a95fc"
 
-    $testDataPath = "$PSScriptRoot/../../private/TestData.json"
+    $testDataPath = Resolve-Path -Path "$PSScriptRoot/../../private/TestData.json"
 
     Get-DsiKeyVaultSecret -Name "regressionTestDataConfig" `
         | ConvertFrom-Json -Depth 10 | ConvertTo-Json -Depth 10 ` # Fix any formatting issues.

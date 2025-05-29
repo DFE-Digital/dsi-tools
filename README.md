@@ -12,6 +12,9 @@ Run the following script to ensure that the required tooling is installed and is
 
 The cmdlets module is added to the user PowerShell profile which means that the various commands that are presented in this README.md file can be used when starting a new PowerShell session.
 
+
+## Tip for developers working on the cmdlets
+
 It is useful to re-import the cmdlets module when editing on the cmdlets.
 
 Cmdlets can be re-imported into an existing PowerShell session with the following command:
