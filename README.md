@@ -75,6 +75,12 @@ Get the active test data path:
 Get-DsiTestDataPath
 ```
 
+If the test data has already been imported then it can be selected with:
+
+```pwsh
+Use-DsiTestData -Name DEV
+```
+
 
 ## Testers: Submitting test data to the connected KeyVault
 
