@@ -19,17 +19,16 @@ function Set-DsiKeyVaultSecret {
     param (
         [Parameter(Mandatory=$true)]
         [String]$Name,
+
         [Parameter(Mandatory=$true)]
         [SecureString]$SecretValue
     )
 
     Test-DsiConnectedEnv > $null
 
-    $secret = Set-AzKeyVaultSecret `
+    return Set-AzKeyVaultSecret `
         -VaultName $global:DsiConnectedEnv.KeyVault `
         -Name $Name `
         -SecretValue $SecretValue `
         -Confirm
-
-    return $secret
 }

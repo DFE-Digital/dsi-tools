@@ -23,6 +23,7 @@ function Set-DsiUserSecret {
     param (
         [Parameter(Mandatory=$true)]
         [String]$Name,
+
         [Parameter(Mandatory=$true)]
         [String]$Value
     )

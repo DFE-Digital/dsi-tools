@@ -24,8 +24,10 @@ function New-DsiPublicApiToken {
     param (
         [Parameter(Mandatory=$true)]
         [String]$ClientId,
+
         [Parameter(Mandatory=$true)]
         [String]$ApiSecret,
+
         [String]$Audience = "signin.education.gov.uk"
     )
 
