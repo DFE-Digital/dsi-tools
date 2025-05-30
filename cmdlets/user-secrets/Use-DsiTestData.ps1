@@ -30,13 +30,17 @@ function Use-DsiTestData {
 
     try {
         $testDataPath = Resolve-Path "$PSScriptRoot/../../private/TestData_$Name.json"
+        $testConfigPath = Resolve-Path "$PSScriptRoot/../../private/TestData.Config_$Name.json"
     }
     catch {
         Write-Output "Test data does not exist for '$Name'. Use `Import-DsiTestData` to import the test data."
         return $null
     }
 
-    Set-DsiUserSecret -Name "TestDataPath" -Value $( Resolve-Path -Path $testDataPath )
+    $config = Get-Content -Path $testConfigPath -Raw | ConvertFrom-Json
+    foreach ($property in $config.PSObject.Properties) {
+        Set-DsiUserSecret -Name $($property.Name) -Value  $($property.Value)
+    }
 
     return $testDataPath
 }

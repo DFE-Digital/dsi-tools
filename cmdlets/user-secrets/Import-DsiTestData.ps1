@@ -24,13 +24,12 @@ function Import-DsiTestData {
     $ErrorActionPreference = "Stop"
 
     $env = Test-DsiConnectedEnv
+    $projectId = "74491194-d775-4d5f-973f-870ed02a95fc"
 
 
     #----- UI Tests ---------------------------------------------------------------------
 
-    Use-DsiSecretsProject `
-        -Name "UI Tests" `
-        -Id "74491194-d775-4d5f-973f-870ed02a95fc"
+    Use-DsiSecretsProject -Name "UI Tests" -Id $projectId
 
     Set-DsiUserSecretsFromKeyVault -Mappings @(
         @{
@@ -56,10 +55,17 @@ function Import-DsiTestData {
     )
 
     $testDataPath = "$PSScriptRoot/../../private/TestData_$($env.Name).json"
+    $testConfigPath = "$PSScriptRoot/../../private/TestData.Config_$($env.Name).json"
 
     Get-DsiKeyVaultSecret -Name "regressionTestDataConfig" `
         | ConvertFrom-Json -Depth 10 | ConvertTo-Json -Depth 10 ` # Fix any formatting issues.
         | Out-File ( New-Item -Path $testDataPath -Force )
 
     Set-DsiUserSecret -Name "TestDataPath" -Value $( Resolve-Path -Path $testDataPath )
+
+    # Cache user secrets state so that it can be restored when `Use-DsiTestData` is used.
+    $matches = $null
+    if ($(dotnet user-secrets list --json --id $projectId) -join "`n" -match "(?s)//BEGIN(.+)//END") {
+        $matches[1].Trim() | Out-File $testConfigPath
+    }
 }
