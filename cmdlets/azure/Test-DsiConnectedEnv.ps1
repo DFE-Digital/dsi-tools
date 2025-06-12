@@ -1,11 +1,11 @@
 function Test-DsiConnectedEnv {
-<#
+    <#
     .SYNOPSIS
         Tests that there is an active DfE Sign-in environment.
 
-    .NOTES
+    .DESCRIPTION
         Throws an error if there is no connection.
-    
+
     .PARAMETER Name
         When specified, this command tests that the specified envrionment is connected:
             - TRAN
@@ -20,7 +20,7 @@ function Test-DsiConnectedEnv {
             - Subscription - The name of the associated subscription.
             - Prefix - The resource prefix.
             - KeyVault - The name of the KeyVault resource.
-#>
+    #>
     [CmdletBinding()]
     param (
         [String]$Name = $null

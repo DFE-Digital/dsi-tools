@@ -1,9 +1,9 @@
 function Set-DsiUserSecret {
-<#
+    <#
     .SYNOPSIS
         Sets a user secret for the active .NET project.
 
-    .NOTES
+    .DESCRIPTION
         Throws error if no user secrets project is active.
 
     .PARAMETER Name
@@ -18,13 +18,17 @@ function Set-DsiUserSecret {
     .EXAMPLE
         PS> Use-DsiSecretsProject -Name "Example Project" -Id "97af337f-9c41-4db1-aaac-9c8537229ee9"
         PS> Set-DsiUserSecret -Name Some:Setting -Value "123"
-#>
+    #>
     [CmdletBinding()]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute(
+        'PSUseShouldProcessForStateChangingFunctions', '',
+        Justification = 'This cmdlet only sets a local user secret.'
+    )]
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [String]$Name,
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [String]$Value
     )
 

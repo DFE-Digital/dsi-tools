@@ -1,5 +1,5 @@
 function Disconnect-DsiEnv {
-<#
+    <#
     .SYNOPSIS
         Disconnects from the connected DfE Sign-in environment.
 
@@ -8,7 +8,7 @@ function Disconnect-DsiEnv {
 
     .EXAMPLE
         PS> Disconnect-DsiEnv
-#>
+    #>
     [CmdletBinding()]
     param ()
 

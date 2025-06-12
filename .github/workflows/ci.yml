@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  pull_request:
+    types: [ opened, reopened, synchronize ]
+
+  merge_group:
+    types: [ checks_requested ]
+
+  push: # Useful for debugging; please comment out again before PR.
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  powershell-checks:
+    name: Powershell checks
+    uses: ./.github/workflows/powershell-checks.yml
+    permissions:
+      checks: write # Needed by 'dorny/test-reporter'.

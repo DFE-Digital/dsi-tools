@@ -1,5 +1,5 @@
 function Connect-DsiEnv {
-<#
+    <#
     .SYNOPSIS
         Connects to a DfE Sign-in environment in Azure.
 
@@ -18,10 +18,10 @@ function Connect-DsiEnv {
         PS> Connect-DsiEnv -Name DEV
         PS> xyz...
         PS> Disconnect-DsiEnv
-#>
+    #>
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [String]$Name
     )
 
@@ -30,7 +30,7 @@ function Connect-DsiEnv {
     try {
         Write-Output "Connecting to $Name..."
 
-        $env = Get-DsiEnvMetadata -Name $Name
+        $env = Get-DsiEnvMeta -Name $Name
 
         Connect-AzAccount -Subscription $env.Subscription
     }

@@ -1,9 +1,9 @@
 function Use-DsiTestData {
-<#
+    <#
     .SYNOPSIS
         Use test data that has already been imported for a hosted environment.
 
-    .NOTES
+    .DESCRIPTION
         You must have already imported the test data in order for this command to work.
 
     .PARAMETER Name
@@ -19,10 +19,10 @@ function Use-DsiTestData {
 
     .EXAMPLE
         PS> Use-DsiTestData -Name DEV
-#>
+    #>
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [String]$Name
     )
 

@@ -15,6 +15,8 @@ The cmdlets module is added to the user PowerShell profile which means that the 
 
 ## Developers: Tips for when working on the cmdlets
 
+The official Microsoft PowerShell extension can be used to ensure automatic formatting and code analysis when using Visual Studio Code.
+
 It is useful to re-import the cmdlets module when editing on the cmdlets.
 
 Cmdlets can be re-imported into an existing PowerShell session with the following command:

@@ -1,9 +1,9 @@
 function Set-DsiUserSecretsFromKeyVault {
-<#
+    <#
     .SYNOPSIS
         Sets user secrets for the active .NET project with KeyVault mappings.
 
-    .NOTES
+    .DESCRIPTION
         Throws error if no user secrets project is active.
 
     .PARAMETER Mappings
@@ -28,10 +28,14 @@ function Set-DsiUserSecretsFromKeyVault {
             }
         )
         PS> Disconnect-DsiEnv
-#>
+    #>
     [CmdletBinding()]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute(
+        'PSUseShouldProcessForStateChangingFunctions', '',
+        Justification = 'This cmdlet only sets local user secrets.'
+    )]
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [PSCustomObject[]]$Mappings
     )
 
@@ -40,6 +44,8 @@ function Set-DsiUserSecretsFromKeyVault {
     if (-not $global:DsiActiveUserSecretsId) {
         throw "Cannot set user secret because there is not an active project."
     }
+
+    Test-DsiConnectedEnv > $null
 
     foreach ($mapping in $Mappings) {
         $value = $mapping.Value -replace "{{([^}]+?)}}", {

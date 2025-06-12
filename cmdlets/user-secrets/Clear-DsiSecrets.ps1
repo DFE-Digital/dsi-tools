@@ -1,24 +1,35 @@
 function Clear-DsiSecrets {
-<#
+    <#
     .SYNOPSIS
         Clear all user secrets for all projects.
 
-    .NOTES
+    .DESCRIPTION
         This command clears ALL user secrets for all projects.
 
         This command requires user confirmation.
 
+    .PARAMETER Force
+        Force invocation without prompting for confirmation.
+
     .EXAMPLE
         PS> Clear-DsiSecrets
-        Clear user secrets for DfE Sign-in projects? [y/n]: y
-#>
-    [CmdletBinding()]
-    param ()
+
+        Confirm
+        Are you sure you want to perform this action?
+        Performing the operation 'Clear local user secrets'.
+        [Y] Yes  [N] No  [S] Suspend  [?] Help (default is "Y"): y
+    #>
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param (
+        [Switch]$Force
+    )
 
     $ErrorActionPreference = "Stop"
 
-    $reply = Read-Host -Prompt "Clear user secrets for DfE Sign-in projects? [y/n]"
-    if ($reply.ToLower() -ne "y") {
+    if (-not ($Force -or $PSCmdlet.ShouldContinue(@"
+Are you sure you want to perform this action?
+Performing the operation 'Clear local user secrets'.
+"@, 'Confirm'))) {
         Write-Output "Cancelled."
         return
     }
@@ -26,15 +37,15 @@ function Clear-DsiSecrets {
     $projects = @(
         @{
             Name = "Public API"
-            Id = "9cf57240-a4e9-44b7-8c09-922da90f69eb"
+            Id   = "9cf57240-a4e9-44b7-8c09-922da90f69eb"
         }
         @{
             Name = "Select Organisation"
-            Id = "9bc1d9ef-36ce-492e-876f-6d80fe79896c"
+            Id   = "9bc1d9ef-36ce-492e-876f-6d80fe79896c"
         }
         @{
             Name = "UI Tests"
-            Id = "74491194-d775-4d5f-973f-870ed02a95fc"
+            Id   = "74491194-d775-4d5f-973f-870ed02a95fc"
         }
     )
 

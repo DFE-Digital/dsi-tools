@@ -1,0 +1,20 @@
+name: Check PowerShell scripts
+
+on:
+  workflow_call:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run code quality tests
+        run: |
+          Invoke-ScriptAnalyzer `
+            -Path ./cmdlets/**/*.ps1 `
+            -Settings ./.config/PSScriptAnalyzerSettings.psd1
