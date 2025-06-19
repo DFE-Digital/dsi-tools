@@ -1,5 +1,7 @@
 # dsi-tools
 
+[![CI](https://github.com/DFE-Digital/dsi-tools/actions/workflows/ci.yml/badge.svg)](https://github.com/DFE-Digital/dsi-tools/actions/workflows/ci.yml)
+
 ## Setup tooling
 
 Run the following script to ensure that the required tooling is installed and is up-to-date:
