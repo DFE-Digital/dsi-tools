@@ -17,3 +17,5 @@ jobs:
   powershell-checks:
     name: Powershell checks
     uses: ./.github/workflows/powershell-checks.yml
+    permissions:
+      security-events: write # Needed by 'github/codeql-action/upload-sarif'.
