@@ -17,5 +17,3 @@ jobs:
   powershell-checks:
     name: Powershell checks
     uses: ./.github/workflows/powershell-checks.yml
-    permissions:
-      checks: write # Needed by 'dorny/test-reporter'.
