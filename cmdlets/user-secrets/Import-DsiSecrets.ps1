@@ -1,9 +1,9 @@
 function Import-DsiSecrets {
-<#
+    <#
     .SYNOPSIS
         Import secrets for a hosted environment.
 
-    .NOTES
+    .DESCRIPTION
         You must be connected to the environment in order for this command to work.
 
     .OUTPUTS
@@ -13,7 +13,7 @@ function Import-DsiSecrets {
         PS> Connect-DsiEnv -Name DEV
         PS> Import-DsiSecrets
         PS> Disconnect-DsiEnv
-#>
+    #>
     [CmdletBinding()]
     param ()
 
@@ -30,7 +30,7 @@ function Import-DsiSecrets {
 
     Set-DsiUserSecretsFromKeyVault -Mappings @(
         @{
-            Name = "BearerToken:ValidAudience"
+            Name  = "BearerToken:ValidAudience"
             Value = "signin.education.gov.uk"
         }
     )

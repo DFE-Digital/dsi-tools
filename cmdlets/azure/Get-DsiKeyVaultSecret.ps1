@@ -1,5 +1,5 @@
 function Get-DsiKeyVaultSecret {
-<#
+    <#
     .SYNOPSIS
         Gets a secret from the connected KeyVault.
 
@@ -11,10 +11,10 @@ function Get-DsiKeyVaultSecret {
 
     .EXAMPLE
         PS> Get-DsiKeyVaultSecret -Name secretname
-#>
+    #>
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [String]$Name
     )
 

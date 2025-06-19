@@ -1,5 +1,5 @@
 function New-DsiPublicApiToken {
-<#
+    <#
     .SYNOPSIS
         Create an authorization token to use when using the DfE Sign-in Public API.
 
@@ -19,19 +19,23 @@ function New-DsiPublicApiToken {
 
     .EXAMPLE
         PS> New-DsiPublicApiToken -ClientId abc -ApiSecret xyz
-#>
+    #>
     [CmdletBinding()]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute(
+        'PSUseShouldProcessForStateChangingFunctions', '',
+        Justification = 'This cmdlet starts a proxy server locally.'
+    )]
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [String]$ClientId,
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [String]$ApiSecret,
 
         [String]$Audience = "signin.education.gov.uk"
     )
 
-    function Normalize-HmacSha256Key {
+    function Get-NormalizedHmacSha256Key {
         param (
             [byte[]]$KeyBytes
         )
@@ -58,7 +62,7 @@ function New-DsiPublicApiToken {
     $body = ConvertTo-Base64Url $bodyBytes
 
     $hmac = New-Object System.Security.Cryptography.HMACSHA256
-    $hmac.Key = Normalize-HmacSha256Key ([Text.Encoding]::UTF8.GetBytes($ApiSecret))
+    $hmac.Key = Get-NormalizedHmacSha256Key ([Text.Encoding]::UTF8.GetBytes($ApiSecret))
     $signatureBytes = $hmac.ComputeHash([System.Text.Encoding]::UTF8.GetBytes("$header.$body"))
     $sig = ConvertTo-Base64Url $signatureBytes
 

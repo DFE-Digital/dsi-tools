@@ -1,0 +1,32 @@
+name: Check PowerShell scripts
+
+on:
+  workflow_call:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run code quality tests
+        uses: microsoft/psscriptanalyzer-action@v1.1
+        with:
+          path: ./cmdlets
+          recurse: true 
+          enableExit: true
+          severity: '"Error", "Warning"'
+          settings: ./.config/PSScriptAnalyzerSettings.psd1
+          output: results.sarif
+
+      - name: Upload code quality results
+        uses: github/codeql-action/upload-sarif@v3
+        if: ${{ always() }}
+        with:
+          sarif_file: results.sarif
+          category: powershell-checks
+  

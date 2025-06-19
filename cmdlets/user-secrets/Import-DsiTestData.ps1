@@ -1,9 +1,9 @@
 function Import-DsiTestData {
-<#
+    <#
     .SYNOPSIS
         Import test data that is associated with a hosted environment.
 
-    .NOTES
+    .DESCRIPTION
         You must be connected to the environment in order for this command to work.
 
         Test data is imported as a JSON file which can be manually edited as needed for
@@ -17,7 +17,11 @@ function Import-DsiTestData {
         PS> Connect-DsiEnv -Name DEV
         PS> Import-DsiTestData
         PS> Disconnect-DsiEnv
-#>
+    #>
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute(
+        'PSAvoidAssignmentToAutomaticVariable', '',
+        Justification = 'A workaround to a bug was needed.'
+    )]
     [CmdletBinding()]
     param ()
 
@@ -33,23 +37,23 @@ function Import-DsiTestData {
 
     Set-DsiUserSecretsFromKeyVault -Mappings @(
         @{
-            Name = "Platform:ServicesBaseAddress"
+            Name  = "Platform:ServicesBaseAddress"
             Value = "https://{{ standaloneServicesHostName }}"
         }
         @{
-            Name = "Platform:ProfileBaseAddress"
+            Name  = "Platform:ProfileBaseAddress"
             Value = "https://{{ standaloneProfileHostName }}"
         }
         @{
-            Name = "Platform:ManageBaseAddress"
+            Name  = "Platform:ManageBaseAddress"
             Value = "https://{{ standaloneManageHostName }}"
         }
         @{
-            Name = "Platform:InteractionsBaseAddress"
+            Name  = "Platform:InteractionsBaseAddress"
             Value = "https://{{ standaloneInteractionsHostName }}"
         }
         @{
-            Name = "Platform:PublicApiBaseAddress"
+            Name  = "Platform:PublicApiBaseAddress"
             Value = "https://{{ standalonePublicApiHostName }}"
         }
     )
@@ -58,13 +62,13 @@ function Import-DsiTestData {
     $testConfigPath = "$PSScriptRoot/../../private/TestData.Config_$($env.Name).json"
 
     Get-DsiKeyVaultSecret -Name "regressionTestDataConfig" `
-        | ConvertFrom-Json -Depth 10 | ConvertTo-Json -Depth 10 ` # Fix any formatting issues.
-        | Out-File ( New-Item -Path $testDataPath -Force )
+    | ConvertFrom-Json -Depth 10 | ConvertTo-Json -Depth 10 ` # Fix any formatting issues.
+    | Out-File ( New-Item -Path $testDataPath -Force )
 
     Set-DsiUserSecret -Name "TestDataPath" -Value $( Resolve-Path -Path $testDataPath )
 
     # Cache user secrets state so that it can be restored when `Use-DsiTestData` is used.
-    $matches = $null
+    $matches = $null # Workaround for bug.
     if ($(dotnet user-secrets list --json --id $projectId) -join "`n" -match "(?s)//BEGIN(.+)//END") {
         $matches[1].Trim() | Out-File $testConfigPath
     }

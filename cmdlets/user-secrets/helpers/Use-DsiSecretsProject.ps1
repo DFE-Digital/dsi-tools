@@ -1,5 +1,5 @@
 function Use-DsiSecretsProject {
-<#
+    <#
     .SYNOPSIS
         Use the specified .NET user-secrets project ID.
 
@@ -17,13 +17,13 @@ function Use-DsiSecretsProject {
 
     .EXAMPLE
         PS> Use-DsiSecretsProject -Name "Example Project" -Id "97af337f-9c41-4db1-aaac-9c8537229ee9"
-#>
+    #>
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [String]$Name,
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [String]$Id
     )
 

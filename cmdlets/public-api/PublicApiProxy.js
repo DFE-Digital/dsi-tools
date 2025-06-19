@@ -24,8 +24,8 @@ function resolveTargetUri(path) {
 }
 
 const server = http.createServer(handler);
-const httpListenOnPort = 3011;
-server.listen(httpListenOnPort, () => {console.log(`Proxy listening on: ${httpListenOnPort}`)});
+const httpListenOnPort = 5086;
+server.listen(httpListenOnPort, () => { console.log(`Proxy listening on: ${httpListenOnPort}`) });
 
 function handler(req, res) {
   const originalRequestUrl = req.url;
@@ -45,7 +45,7 @@ function handler(req, res) {
 
   const requestHandler = protocol === "https" ? https : http;
   const proxyReq = requestHandler.request(options, (proxyRes) => {
-    const dt = (new Date()).toJSON().slice(0,19).replace("T", ":")
+    const dt = (new Date()).toJSON().slice(0, 19).replace("T", ":")
     console.log(`${dt} ${proxyRes.req.method} ${originalRequestUrl}\n  --> ${proxyRes.statusCode} ${proxyRes.req.protocol}//${proxyRes.req.host}${proxyRes.req.path}`);
     res.writeHead(proxyRes.statusCode, proxyRes.headers);
     proxyRes.pipe(res); // Plain HTTP back

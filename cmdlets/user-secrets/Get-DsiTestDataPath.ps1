@@ -1,9 +1,9 @@
 function Get-DsiTestDataPath {
-<#
+    <#
     .SYNOPSIS
         Gets the active test data path.
 
-    .NOTES
+    .DESCRIPTION
         This is the value of the "TestDataPath" user secret for "dsi-ui-tests".
 
     .OUTPUTS
@@ -11,14 +11,16 @@ function Get-DsiTestDataPath {
 
     .EXAMPLE
         PS> Get-DsiTestDataPath
-#>
+    #>
     [CmdletBinding()]
+    [OutputType([String])]
     param ()
 
     $ErrorActionPreference = "Stop"
 
-    $userSecrets = dotnet user-secrets list --json --id "74491194-d775-4d5f-973f-870ed02a95fc" `
-        | ConvertFrom-Json
+    $userSecrets = dotnet user-secrets list `
+        --json `
+        --id "74491194-d775-4d5f-973f-870ed02a95fc" | ConvertFrom-Json
 
     if ($userSecrets.TestDataPath) {
         return $userSecrets.TestDataPath

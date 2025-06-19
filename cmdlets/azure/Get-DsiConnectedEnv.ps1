@@ -1,5 +1,5 @@
 function Get-DsiConnectedEnv {
-<#
+    <#
     .SYNOPSIS
         Identifies the current DfE Sign-in environment.
 
@@ -12,7 +12,7 @@ function Get-DsiConnectedEnv {
 
     .EXAMPLE
         PS> Get-DsiConnectedEnv
-#>
+    #>
     [CmdletBinding()]
     param ()
 
