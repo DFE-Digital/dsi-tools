@@ -13,6 +13,10 @@ function Start-DsiTlsProxy {
         PS> Start-DsiTlsProxy
     #>
     [CmdletBinding()]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute(
+        'PSUseShouldProcessForStateChangingFunctions', '',
+        Justification = 'This cmdlet starts a proxy server locally.'
+    )]
     param ()
 
     Write-Output "Starting TLS proxy..."
