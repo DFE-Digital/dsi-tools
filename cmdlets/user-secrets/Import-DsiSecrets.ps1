@@ -51,4 +51,26 @@ function Import-DsiSecrets {
     Set-DsiApiConnectionUserSecrets -ApiName "Directories"
     Set-DsiApiConnectionUserSecrets -ApiName "Applications"
     Set-DsiApiConnectionUserSecrets -ApiName "Access"
+
+
+    #----- Help -------------------------------------------------------------------------
+
+    Use-DsiSecretsProject `
+        -Name "Help" `
+        -Id "604df2cb-b96d-4942-93f6-acfd70ece5d0"
+    
+    $yourEmailAddress = (Get-AzContext).Account.Id.ToLower()
+
+    Set-DsiUserSecretsFromKeyVault -Mappings @(
+        @{
+            Name  = "GovNotify:ApiKey"
+            Value = "{{ govNotifyApiKey }}"
+        }
+        @{
+            Name  = "RaiseSupportTicketByEmail:SupportEmailAddress"
+            Value = $yourEmailAddress
+        }
+    )
+
+    Set-DsiApiConnectionUserSecrets -ApiName "Applications"
 }
