@@ -41,7 +41,7 @@ Performing the operation 'Export test data to KeyVault' for the '$($global:DsiCo
         return
     }
 
-    $testDataPath = Resolve-Path -Path "$PSScriptRoot/../../private/TestData_$($env.Name).json"
+    $testDataPath = Resolve-Path -Path "$PSScriptRoot/../../private/TestData_$($global:DsiConnectedEnv.Name).json"
     $testData = Get-Content -Path $testDataPath | ConvertFrom-Json -Depth 10 | ConvertTo-Json -Depth 10 # Fix any formatting issues.
     if (-not $testData) {
         throw "No test data found."
