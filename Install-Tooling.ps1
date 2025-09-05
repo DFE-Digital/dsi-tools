@@ -2,6 +2,9 @@
 .SYNOPSIS
     Install or update the required tooling.
 
+.PARAMETER DefaultTenantId
+    ID of the default tenant to use with running `Connect-DsiEnv`.
+
 .OUTPUTS
     None.
 
@@ -9,7 +12,9 @@
     PS> ./Install-Tooling.ps1
 #>
 [CmdletBinding()]
-param ()
+param (
+    [String]$DefaultTenantId = $null
+)
 
 
 # Ensure that the Az module is installed and up to date.
@@ -40,6 +45,7 @@ if (Test-Path -Path $profilePath) {
 $cmdletInit = @"
 ### BEGIN DSI-TOOLS ###
 Import-Module -Name $PSScriptRoot/cmdlets/Module
+$($DefaultTenantId ? "`$global:DsiDefaultTenantId = `"$DefaultTenantId`"" : "")
 ### END DSI-TOOLS ###
 "@
 
@@ -57,3 +63,6 @@ Set-Content -Path $profilePath -Value $profileContent.Trim()
 
 # Ensure that module is available immediately after the install script is ran.
 Import-Module -Name "$PSScriptRoot/cmdlets/Module" -Force
+
+
+Write-Output "Tooling was installed successfully."
