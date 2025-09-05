@@ -7,13 +7,18 @@
 Run the following script to ensure that the required tooling is installed and is up-to-date:
 
 ```pwsh
+./Install-Tooling.ps1 -DefaultTenantId <replace-with-tenant-id>
+```
+
+The tenant ID does not need to be provided; however, it will need to be provided each time the `Connect-DsiEnv` command is used.
+
+```pwsh
 ./Install-Tooling.ps1
 ```
 
 > **WARNING** - The above script makes changes to the user PowerShell profile located at the path `~/.config/powershell/Microsoft.PowerShell_profile.ps1`.
 
 The cmdlets module is added to the user PowerShell profile which means that the various commands that are presented in this README.md file can be used when starting a new PowerShell session.
-
 
 ## Developers: Tips for when working on the cmdlets
 
@@ -27,13 +32,18 @@ Cmdlets can be re-imported into an existing PowerShell session with the followin
 Import-Module -Name ./cmdlets/Module -Force
 ```
 
-
 ## Developers: Connecting to the development environment
 
 Connect to (or switch to a different) the development environment:
 
 ```pwsh
 Connect-DsiEnv -Name DEV
+```
+
+or
+
+```pwsh
+Connect-DsiEnv -Name DEV -TenantId <replace-with-tenant-id>
 ```
 
 Follow the on-screen instructions to connect with your Azure account.
@@ -50,13 +60,18 @@ Disconnect when you are finished:
 Disconnect-DsiEnv
 ```
 
-
 ## Testers: Connecting to the development environment
 
 Connect to (or switch to a different) the development environment:
 
 ```pwsh
 Connect-DsiEnv -Name DEV
+```
+
+or
+
+```pwsh
+Connect-DsiEnv -Name DEV -TenantId <replace-with-tenant-id>
 ```
 
 Follow the on-screen instructions to connect with your Azure account.
@@ -85,7 +100,6 @@ If the test data has already been imported then it can be selected with:
 Use-DsiTestData -Name DEV
 ```
 
-
 ## Testers: Submitting test data to the connected KeyVault
 
 Submit the local `private/TestData_ENV.json` file to the connected KeyVault:
@@ -94,7 +108,6 @@ Submit the local `private/TestData_ENV.json` file to the connected KeyVault:
 Connect-DsiEnv -Name DEV
 Export-DsiTestDataToKeyVault
 ```
-
 
 ## Clearing all local user secrets
 
@@ -108,7 +121,6 @@ You will be prompted to confirm; type 'yes' to confirm, or 'no' to abort.
 
 > **WARNING** - User secrets will be deleted for all tracked DfE Sign-in .NET projects. This operation cannot be reversed.
 
-
 ## Getting help for the various commands
 
 The cmdlets in this repository make use of the standard help comments feature of PowerShell.
@@ -119,7 +131,6 @@ For example, to get help for the `Connect-DsiEnv` command:
 Help Connect-DsiEnv
 ```
 
-
 ## Generate authorization bearer token for Public API
 
 This script generates a bearer token for use with the DfE Sign-in Public API which takes the `ClientId` and `ApiSecret` of a service.
@@ -129,7 +140,6 @@ Usage example:
 ```pwsh
 New-DsiPublicApiToken -ClientId "ExampleClient" -ApiSecret "example-api-secret"
 ```
-
 
 ## MacOS - Use proxy to connect to hosted APIs
 
@@ -142,7 +152,6 @@ Start-DsiTlsProxy
 ```
 
 > **NOTE** - The application needs to be configured to use the proxy.
-
 
 ## Use proxy to connect to Public API
 
