@@ -31,15 +31,9 @@ else {
 
 
 # Import cmdlet module when a PowerShell session is started.
-if ($IsMacOS) {
-    $profilePath = "~/.config/powershell/Microsoft.PowerShell_profile.ps1"
-}
-else {
-    $profilePath = "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
-}
 $profileContent = ""
-if (Test-Path -Path $profilePath) {
-    $profileContent = Get-Content -Path $profilePath | Out-String
+if (Test-Path -Path $PROFILE) {
+    $profileContent = Get-Content -Path $PROFILE | Out-String
 }
 
 $cmdletInit = @"
@@ -57,8 +51,8 @@ else {
     $profileContent = $("{0}`n`n{1}" -f $profileContent, $cmdletInit)
 }
 
-New-Item -ItemType File -Path $profilePath -Force
-Set-Content -Path $profilePath -Value $profileContent.Trim()
+New-Item -ItemType File -Path $PROFILE -Force
+Set-Content -Path $PROFILE -Value $profileContent.Trim()
 
 
 # Ensure that module is available immediately after the install script is ran.
