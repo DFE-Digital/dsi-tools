@@ -38,7 +38,7 @@ if (Test-Path -Path $PROFILE) {
 
 $cmdletInit = @"
 ### BEGIN DSI-TOOLS ###
-Import-Module -Name $PSScriptRoot/cmdlets/Module
+Import-Module -Name $PSScriptRoot/cmdlets/DsiTools
 $($DefaultTenantId ? "`$global:DsiDefaultTenantId = `"$DefaultTenantId`"" : "")
 ### END DSI-TOOLS ###
 "@
@@ -56,7 +56,7 @@ Set-Content -Path $PROFILE -Value $profileContent.Trim()
 
 
 # Ensure that module is available immediately after the install script is ran.
-Import-Module -Name "$PSScriptRoot/cmdlets/Module" -Force
+Import-Module -Name "$PSScriptRoot/cmdlets/DsiTools" -Force
 
 
 Write-Output "Tooling was installed successfully."

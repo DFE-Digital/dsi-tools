@@ -20,6 +20,14 @@ The tenant ID does not need to be provided; however, it will need to be provided
 
 The cmdlets module is added to the user PowerShell profile which means that the various commands that are presented in this README.md file can be used when starting a new PowerShell session.
 
+## List all available commands
+
+Use the following command to get a list of all commands from the "DsiTools" module:
+
+```pwsh
+Get-Command -Module DsiTools
+```
+
 ## Developers: Tips for when working on the cmdlets
 
 The official Microsoft PowerShell extension can be used to ensure automatic formatting and code analysis when using Visual Studio Code.
