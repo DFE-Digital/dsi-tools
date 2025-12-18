@@ -149,17 +149,19 @@ Usage example:
 New-DsiPublicApiToken -ClientId "ExampleClient" -ApiSecret "example-api-secret"
 ```
 
-## MacOS - Use proxy to connect to hosted APIs
+## Use proxy to connect to hosted APIs
 
-There is a limitation on Mac where TLS 1.3 is not supported which means that any HTTP request to mid-tier services will fail.
+There is a limitation on Mac where TLS 1.3 is not supported which means that any HTTP request to mid-tier services will fail. Some developers have also found this useful when running on Windows development machines.
 
-To workaround this the `node-proxy` can be used:
+To workaround this the TLS proxy can be used:
 
 ```pwsh
 Start-DsiTlsProxy
 ```
 
-> **NOTE** - The application needs to be configured to use the proxy.
+> **NOTE 1** - The application needs to be configured to use the proxy.
+
+> **NOTE 2** - Node.js must be installed when using the `Start-DsiTlsProxy` command.
 
 ## Use proxy to connect to Public API
 
