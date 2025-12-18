@@ -22,6 +22,18 @@ function Import-DsiSecrets {
     Test-DsiConnectedEnv > $null
 
 
+    #----- Entra Auth Extensions --------------------------------------------------------
+
+    Use-DsiSecretsProject `
+        -Name "Entra Auth Extensions" `
+        -Id "835f69d2-f31e-49e5-9ade-963db5fa9f18"
+
+    Set-DsiApiConnectionUserSecrets -ApiName "Organisations"
+    Set-DsiApiConnectionUserSecrets -ApiName "Directories"
+    Set-DsiApiConnectionUserSecrets -ApiName "Access"
+    Set-DsiApiConnectionUserSecrets -ApiName "Search"
+
+
     #----- Public API -------------------------------------------------------------------
 
     Use-DsiSecretsProject `
@@ -53,12 +65,66 @@ function Import-DsiSecrets {
     Set-DsiApiConnectionUserSecrets -ApiName "Access"
 
 
+    #----- Profile -------------------------------------------------------------------------
+
+    Use-DsiSecretsProject `
+        -Name "Profile" `
+        -Id "fa6df331-f36f-4e6c-a01d-a5b78c8b642f"
+
+    Set-DsiUserSecretsFromKeyVault -Mappings @(
+        @{
+            Name  = "Oidc:ClientId"
+            Value = "{{ profileClientId }}"
+        }
+        @{
+            Name  = "Oidc:ClientSecret"
+            Value = "{{ profileClientSecret }}"
+        }
+        @{
+            Name  = "Oidc:Authority"
+            Value = "https://{{ standaloneOidcHostName }}"
+        }
+        @{
+            Name  = "Oidc:MetadataAddress"
+            Value = "https://{{ standaloneOidcHostName }}/.well-known/openid-configuration"
+        }
+
+        @{
+            Name  = "ExternalId:ClientId"
+            Value = "{{ dfeSigninHybridIntegrationAppClientId }}"
+        }
+        @{
+            Name  = "ExternalId:ClientSecret"
+            Value = "{{ dfeSigninHybridIntegrationAppSecret }}"
+        }
+        @{
+            Name  = "ExternalId:Authority"
+            Value = "{{ entraCloudInstance }}{{ entraTenantId }}"
+        }
+        @{
+            Name  = "ExternalId:Instance"
+            Value = "{{ entraInstanceUri }}"
+        }
+        @{
+            Name  = "ExternalId:TenantId"
+            Value = "{{ entraTenantId }}"
+        }
+
+        @{
+            Name  = "GraphApi:Endpoint"
+            Value = "{{ entraGraphEndpoint }}"
+        }
+    )
+
+    Set-DsiApiConnectionUserSecrets -ApiName "Directories"
+
+
     #----- Help -------------------------------------------------------------------------
 
     Use-DsiSecretsProject `
         -Name "Help" `
         -Id "604df2cb-b96d-4942-93f6-acfd70ece5d0"
-    
+
     $yourEmailAddress = (Get-AzContext).Account.Id.ToLower()
 
     Set-DsiUserSecretsFromKeyVault -Mappings @(
