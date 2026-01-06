@@ -37,24 +37,28 @@ function Import-DsiTestData {
 
     Set-DsiUserSecretsFromKeyVault -Mappings @(
         @{
-            Name  = "Platform:ServicesBaseAddress"
-            Value = "https://{{ standaloneServicesHostName }}"
-        }
-        @{
-            Name  = "Platform:ProfileBaseAddress"
-            Value = "https://{{ standaloneProfileHostName }}"
-        }
-        @{
-            Name  = "Platform:ManageBaseAddress"
-            Value = "https://{{ standaloneManageHostName }}"
+            Name  = "Platform:HelpBaseAddress"
+            Value = "https://{{ standaloneHelpHostName }}"
         }
         @{
             Name  = "Platform:InteractionsBaseAddress"
             Value = "https://{{ standaloneInteractionsHostName }}"
         }
         @{
+            Name  = "Platform:ManageBaseAddress"
+            Value = "https://{{ standaloneManageHostName }}"
+        }
+        @{
+            Name  = "Platform:ProfileBaseAddress"
+            Value = "https://{{ standaloneProfileHostName }}"
+        }
+        @{
             Name  = "Platform:PublicApiBaseAddress"
             Value = "https://{{ standalonePublicApiHostName }}"
+        }
+        @{
+            Name  = "Platform:ServicesBaseAddress"
+            Value = "https://{{ standaloneServicesHostName }}"
         }
     )
 
