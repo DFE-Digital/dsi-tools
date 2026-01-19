@@ -60,6 +60,28 @@ function Import-DsiTestData {
             Name  = "Platform:ServicesBaseAddress"
             Value = "https://{{ standaloneServicesHostName }}"
         }
+
+        @{
+            Name  = "GraphApi:Endpoint"
+            Value = "{{ entraGraphEndpoint }}"
+        }
+        @{
+            Name  = "GraphApi:TenantId"
+            Value = "{{ entraTenantId }}"
+        }
+        @{
+            Name  = "GraphApi:ClientId"
+            Value = "{{ dfeSigninHybridIntegrationAppClientId }}"
+        }
+        @{
+            Name  = "GraphApi:ClientSecret"
+            Value = "{{ dfeSigninHybridIntegrationAppSecret }}"
+        }
+
+        @{
+            Name  = "Mailosaur:ApiKey"
+            Value = "{{ mailosaurApiKey }}"
+        }
     )
 
     $testDataPath = "$PSScriptRoot/../../private/TestData_$($env.Name).json"
