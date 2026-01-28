@@ -42,53 +42,53 @@ function Import-DsiSecrets {
 
     Set-DsiUserSecretsFromKeyVault -Mappings @(
         @{
-            Name  = "EntityFramework__Directories__Host"
+            Name  = "EntityFramework:Directories:Host"
             Value = "{{ platformGlobalServerName }}"
         }
         @{
-            Name  = "EntityFramework__Directories__Name"
+            Name  = "EntityFramework:Directories:Name"
             Value = "{{ platformGlobalDirectoriesDatabaseName }}"
         }
         @{
-            Name  = "EntityFramework__Directories__Username"
+            Name  = "EntityFramework:Directories:Username"
             Value = "{{ svcSigninDir }}"
         }
         @{
-            Name  = "EntityFramework__Directories__Password"
+            Name  = "EntityFramework:Directories:Password"
             Value = "{{ svcSigninDirPassword }}"
         }
 
         @{
-            Name  = "EntityFramework__Organisations__Host"
+            Name  = "EntityFramework:Organisations:Host"
             Value = "{{ platformGlobalServerName }}"
         }
         @{
-            Name  = "EntityFramework__Organisations__Name"
+            Name  = "EntityFramework:Organisations:Name"
             Value = "{{ platformGlobalOrganisationsDatabaseName }}"
         }
         @{
-            Name  = "EntityFramework__Organisations__Username"
+            Name  = "EntityFramework:Organisations:Username"
             Value = "{{ svcSigninOrg }}"
         }
         @{
-            Name  = "EntityFramework__Organisations__Password"
+            Name  = "EntityFramework:Organisations:Password"
             Value = "{{ svcSigninOrgPassword }}"
         }
 
         @{
-            Name  = "EntityFramework__Audit__Host"
+            Name  = "EntityFramework:Audit:Host"
             Value = "{{ platformGlobalServerName }}"
         }
         @{
-            Name  = "EntityFramework__Audit__Name"
+            Name  = "EntityFramework:Audit:Name"
             Value = "{{ platformGlobalAuditDatabaseName }}"
         }
         @{
-            Name  = "EntityFramework__Audit__Username"
+            Name  = "EntityFramework:Audit:Username"
             Value = "{{ svcSigninAdt }}"
         }
         @{
-            Name  = "EntityFramework__Audit__Password"
+            Name  = "EntityFramework:Audit:Password"
             Value = "{{ svcSigninAdtPassword }}"
         }
     )
