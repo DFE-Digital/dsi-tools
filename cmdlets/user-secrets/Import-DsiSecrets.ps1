@@ -34,6 +34,66 @@ function Import-DsiSecrets {
     Set-DsiApiConnectionUserSecrets -ApiName "Search"
 
 
+    #----- Internal API -------------------------------------------------------------------
+
+    Use-DsiSecretsProject `
+        -Name "Internal API" `
+        -Id "3583e031-7b0f-4819-9605-599cc22f4b9d"
+
+    Set-DsiUserSecretsFromKeyVault -Mappings @(
+        @{
+            Name  = "EntityFramework:Directories:Host"
+            Value = "{{ platformGlobalServerName }}"
+        }
+        @{
+            Name  = "EntityFramework:Directories:Name"
+            Value = "{{ platformGlobalDirectoriesDatabaseName }}"
+        }
+        @{
+            Name  = "EntityFramework:Directories:Username"
+            Value = "{{ svcSigninDir }}"
+        }
+        @{
+            Name  = "EntityFramework:Directories:Password"
+            Value = "{{ svcSigninDirPassword }}"
+        }
+
+        @{
+            Name  = "EntityFramework:Organisations:Host"
+            Value = "{{ platformGlobalServerName }}"
+        }
+        @{
+            Name  = "EntityFramework:Organisations:Name"
+            Value = "{{ platformGlobalOrganisationsDatabaseName }}"
+        }
+        @{
+            Name  = "EntityFramework:Organisations:Username"
+            Value = "{{ svcSigninOrg }}"
+        }
+        @{
+            Name  = "EntityFramework:Organisations:Password"
+            Value = "{{ svcSigninOrgPassword }}"
+        }
+
+        @{
+            Name  = "EntityFramework:Audit:Host"
+            Value = "{{ platformGlobalServerName }}"
+        }
+        @{
+            Name  = "EntityFramework:Audit:Name"
+            Value = "{{ platformGlobalAuditDatabaseName }}"
+        }
+        @{
+            Name  = "EntityFramework:Audit:Username"
+            Value = "{{ svcSigninAdt }}"
+        }
+        @{
+            Name  = "EntityFramework:Audit:Password"
+            Value = "{{ svcSigninAdtPassword }}"
+        }
+    )
+
+
     #----- Public API -------------------------------------------------------------------
 
     Use-DsiSecretsProject `
