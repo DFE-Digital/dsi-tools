@@ -21,6 +21,10 @@ function New-DsiPublicApiToken {
         PS> New-DsiPublicApiToken -ClientId abc -ApiSecret xyz
     #>
     [CmdletBinding()]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute(
+        'PSUseShouldProcessForStateChangingFunctions', '',
+        Justification = 'This cmdlet creates a token but does not change system state.'
+    )]
     param (
         [Parameter(Mandatory = $true)]
         [String]$ClientId,

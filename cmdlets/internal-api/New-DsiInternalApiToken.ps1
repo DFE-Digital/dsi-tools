@@ -15,6 +15,10 @@ function New-DsiInternalApiToken {
         PS> Disconnect-DsiEnv
     #>
     [CmdletBinding()]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute(
+        'PSUseShouldProcessForStateChangingFunctions', '',
+        Justification = 'This cmdlet creates a token but does not change system state.'
+    )]
     param ()
 
     $ErrorActionPreference = "Stop"
