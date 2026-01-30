@@ -30,6 +30,10 @@ else {
 }
 
 
+# Install or update npm dependencies
+npm install
+
+
 # Import cmdlet module when a PowerShell session is started.
 $profileContent = ""
 if (Test-Path -Path $PROFILE) {

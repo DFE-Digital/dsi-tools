@@ -23,7 +23,7 @@ function New-DsiPublicApiToken {
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute(
         'PSUseShouldProcessForStateChangingFunctions', '',
-        Justification = 'This cmdlet starts a proxy server locally.'
+        Justification = 'This cmdlet creates a token but does not change system state.'
     )]
     param (
         [Parameter(Mandatory = $true)]

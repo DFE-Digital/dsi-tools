@@ -17,6 +17,9 @@
         # mac/
         'Start-DsiTlsProxy'
 
+        # internal-api/
+        'New-DsiInternalApiToken'
+
         # public-api/
         'New-DsiPublicApiToken'
         'Start-DsiPublicApiProxy'

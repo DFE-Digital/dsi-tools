@@ -139,6 +139,20 @@ For example, to get help for the `Connect-DsiEnv` command:
 Help Connect-DsiEnv
 ```
 
+## Generate authorization bearer token for Internal API
+
+This script generates a bearer token for use with the DfE Sign-in Internal API.
+
+You must be connected in order to use this command.
+
+Usage example:
+
+```pwsh
+Connect-DsiEnv -Name DEV
+New-DsiInternalApiToken
+Disconnect-DsiEnv
+```
+
 ## Generate authorization bearer token for Public API
 
 This script generates a bearer token for use with the DfE Sign-in Public API which takes the `ClientId` and `ApiSecret` of a service.
