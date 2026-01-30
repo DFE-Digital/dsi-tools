@@ -103,7 +103,11 @@ function Import-DsiSecrets {
     Set-DsiUserSecretsFromKeyVault -Mappings @(
         @{
             Name  = "BearerToken:ValidAudience"
-            Value = "signin.education.gov.uk"
+            Value = "{{ papiValidAudience }}"
+        }
+        @{
+            Name  = "BearerToken:EncryptionKey"
+            Value = "{{ secureApiAes256Key }}"
         }
     )
 
