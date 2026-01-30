@@ -21,10 +21,6 @@ function New-DsiPublicApiToken {
         PS> New-DsiPublicApiToken -ClientId abc -ApiSecret xyz
     #>
     [CmdletBinding()]
-    [Diagnostics.CodeAnalysis.SuppressMessageAttribute(
-        'PSUseShouldProcessForStateChangingFunctions', '',
-        Justification = 'This cmdlet starts a proxy server locally.'
-    )]
     param (
         [Parameter(Mandatory = $true)]
         [String]$ClientId,
