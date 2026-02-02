@@ -106,7 +106,7 @@ function Import-DsiSecrets {
             Value = "{{ papiValidAudience }}"
         }
         @{
-            Name  = "BearerToken:EncryptionKey"
+            Name  = "PublicApiSecretEncryption:Key"
             Value = "{{ secureApiAes256Key }}"
         }
     )
