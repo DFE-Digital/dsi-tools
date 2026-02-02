@@ -28,10 +28,7 @@ function Import-DsiSecrets {
         -Name "Entra Auth Extensions" `
         -Id "835f69d2-f31e-49e5-9ade-963db5fa9f18"
 
-    Set-DsiApiConnectionUserSecrets -ApiName "Organisations"
-    Set-DsiApiConnectionUserSecrets -ApiName "Directories"
-    Set-DsiApiConnectionUserSecrets -ApiName "Access"
-    Set-DsiApiConnectionUserSecrets -ApiName "Search"
+    Set-DsiApiConnectionUserSecrets
 
 
     #----- Internal API -------------------------------------------------------------------
@@ -111,10 +108,7 @@ function Import-DsiSecrets {
         }
     )
 
-    Set-DsiApiConnectionUserSecrets -ApiName "Organisations"
-    Set-DsiApiConnectionUserSecrets -ApiName "Directories"
-    Set-DsiApiConnectionUserSecrets -ApiName "Applications"
-    Set-DsiApiConnectionUserSecrets -ApiName "Access"
+    Set-DsiApiConnectionUserSecrets
 
 
     #----- Select Organisation ----------------------------------------------------------
@@ -123,10 +117,7 @@ function Import-DsiSecrets {
         -Name "Select Organisation" `
         -Id "9bc1d9ef-36ce-492e-876f-6d80fe79896c"
 
-    Set-DsiApiConnectionUserSecrets -ApiName "Organisations"
-    Set-DsiApiConnectionUserSecrets -ApiName "Directories"
-    Set-DsiApiConnectionUserSecrets -ApiName "Applications"
-    Set-DsiApiConnectionUserSecrets -ApiName "Access"
+    Set-DsiApiConnectionUserSecrets
 
 
     #----- Profile -------------------------------------------------------------------------
@@ -180,7 +171,7 @@ function Import-DsiSecrets {
         }
     )
 
-    Set-DsiApiConnectionUserSecrets -ApiName "Directories"
+    Set-DsiApiConnectionUserSecrets
 
 
     #----- Help -------------------------------------------------------------------------
@@ -202,5 +193,5 @@ function Import-DsiSecrets {
         }
     )
 
-    Set-DsiApiConnectionUserSecrets -ApiName "Applications"
+    Set-DsiApiConnectionUserSecrets
 }

@@ -52,6 +52,9 @@ function Set-DsiUserSecretsFromKeyVault {
             $secretName = $_.Groups[1].Value.Trim()
             return Get-DsiKeyVaultSecret -Name $secretName
         }
+        if ($mapping.NonHttp) {
+            $value = $value  -replace 'https:', 'http:'
+        }
         Set-DsiUserSecret -Name $mapping.Name -Value $value
     }
 }
