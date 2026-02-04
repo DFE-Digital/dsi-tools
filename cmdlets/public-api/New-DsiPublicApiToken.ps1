@@ -7,7 +7,7 @@ function New-DsiPublicApiToken {
         The client ID.
 
     .PARAMETER ApiSecret
-        The API secret.
+        The API secret, in either encrypted or plaintext form.
 
     .PARAMETER Audience
         The audience.
@@ -19,6 +19,7 @@ function New-DsiPublicApiToken {
 
     .EXAMPLE
         PS> New-DsiPublicApiToken -ClientId abc -ApiSecret xyz
+        PS> New-DsiPublicApiToken -ClientId abc -ApiSecret ENC:0:Base64EncodedEncryptedSecret
     #>
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute(
@@ -60,6 +61,11 @@ function New-DsiPublicApiToken {
     $header = ConvertTo-Base64Url $headerBytes
     $bodyBytes = [System.Text.Encoding]::UTF8.GetBytes('{"iss":"' + $ClientId + '","aud":"' + $Audience + '"}')
     $body = ConvertTo-Base64Url $bodyBytes
+
+    if ($ApiSecret.StartsWith("ENC:0:")) {
+        $encryptionKey = Get-DsiKeyVaultSecret -Name "secureApiAes256Key"
+        $ApiSecret = Get-Aes256DecryptedValue -Value $ApiSecret -Key $encryptionKey
+    }
 
     $hmac = New-Object System.Security.Cryptography.HMACSHA256
     $hmac.Key = Get-NormalizedHmacSha256Key ([Text.Encoding]::UTF8.GetBytes($ApiSecret))

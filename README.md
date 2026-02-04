@@ -155,12 +155,18 @@ Disconnect-DsiEnv
 
 ## Generate authorization bearer token for Public API
 
-This script generates a bearer token for use with the DfE Sign-in Public API which takes the `ClientId` and `ApiSecret` of a service.
+This script generates a bearer token for use with the DfE Sign-in Public API which takes the `ClientId` and `ApiSecret` of a service. The `ApiSecret` parameter can be provided in plaintext or encrypted.
 
-Usage example:
+Plaintext example:
 
 ```pwsh
 New-DsiPublicApiToken -ClientId "ExampleClient" -ApiSecret "example-api-secret"
+```
+
+Encrypted example:
+
+```pwsh
+New-DsiPublicApiToken -ClientId "ExampleClient" -ApiSecret "ENC:0:Base64EncodedEncryptedValue"
 ```
 
 ## Use proxy to connect to hosted APIs
