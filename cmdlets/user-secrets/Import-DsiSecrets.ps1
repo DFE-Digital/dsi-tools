@@ -90,6 +90,13 @@ function Import-DsiSecrets {
         }
     )
 
+    Set-DsiUserSecretsFromKeyVault -Mappings @(
+        @{
+            Name  = "PublicApiSecretEncryption:Key"
+            Value = "{{ secureApiAes256Key }}"
+        }
+    )
+
 
     #----- Public API -------------------------------------------------------------------
 
