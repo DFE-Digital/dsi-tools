@@ -16,17 +16,25 @@ param (
     [String]$DefaultTenantId = $null
 )
 
+$azModuleName = "Az"
+$installedAzModule = Get-InstalledModule -Name $azModuleName -ErrorAction SilentlyContinue
 
 # Ensure that the Az module is installed and up to date.
-if (-not (Get-Module -ListAvailable -Name Az)) {
-    Write-Output "Az module not found. Installing..."
-    Install-Module -Name Az -Repository PSGallery -Force -Scope CurrentUser
-    Write-Output "Az module installed."
+if (-not $installedAzModule) {
+    Write-Output "$azModuleName module not found. Installing..."
+    Install-Module -Name $azModuleName -Repository PSGallery -Force -Scope CurrentUser
+    Write-Output "$azModuleName module installed."
 }
 else {
-    Write-Output "Az module is already installed. Updating..."
-    Update-Module -Name Az -Force -Scope CurrentUser
-    Write-Output "Az module has been updated."
+    $latestAzModule = Find-Module -Name $azModuleName -Repository PSGallery
+    if ($latestAzModule.Version -gt $installedAzModule.Version) {
+        Write-Output "$azModuleName module is already installed. Updating..."
+        Update-Module -Name $azModuleName -Force -Scope CurrentUser
+        Write-Output "$azModuleName module has been updated."
+    }
+    else {
+        Write-Output "$azModuleName module is already up to date ($($installedAzModule.Version))."
+    }
 }
 
 
