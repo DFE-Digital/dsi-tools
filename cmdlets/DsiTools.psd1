@@ -5,6 +5,9 @@
     GUID            = "02bf8520-7d70-46d3-8f6a-b99fbbb10e63"
 
     CmdletsToExport = @(
+        # utility/
+        'Show-DsiTools'
+
         # azure/
         'Connect-DsiEnv'
         'Disconnect-DsiEnv'
