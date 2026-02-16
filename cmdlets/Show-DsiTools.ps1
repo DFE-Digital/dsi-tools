@@ -21,7 +21,7 @@ function Show-DsiTools {
         }) -join ', '
     }
 
-    $subFolders = Get-ChildItem -Path ./cmdlets -Directory
+    $subFolders = Get-ChildItem -Path "$PSScriptRoot" -Directory
     $commands = Get-Command -Module DsiTools
     $subFolderMap = @{}
 
