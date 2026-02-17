@@ -24,8 +24,8 @@ function Set-DsiApiConnectionUserSecrets {
 
     Set-DsiUserSecretsFromKeyVault -Mappings @(
         @{
-            Name  = "InternalApiClient:BaseAddress"
-            Value = "{{ standaloneIntapiHostName }}"
+            Name    = "InternalApiClient:BaseAddress"
+            Value   = "{{ standaloneIntapiHostName }}"
             NonHttp = $true
         }
         @{
@@ -52,45 +52,37 @@ function Set-DsiApiConnectionUserSecrets {
 
     Set-DsiUserSecretsFromKeyVault -Mappings @(
         @{
-            Name  = "InternalApiClient:Access:BaseAddress"
-            Value = "{{ standaloneAccHostName }}"
+            Name    = "InternalApiClient:Access:BaseAddress"
+            Value   = "{{ standaloneAccHostName }}"
             NonHttp = $true
         }
         @{
-            Name  = "InternalApiClient:Applications:BaseAddress"
-            Value = "{{ standaloneAppHostName }}"
+            Name    = "InternalApiClient:Applications:BaseAddress"
+            Value   = "{{ standaloneAppHostName }}"
             NonHttp = $true
         }
         @{
-            Name  = "InternalApiClient:Directories:BaseAddress"
-            Value = "{{ standaloneDirHostName }}"
+            Name    = "InternalApiClient:Directories:BaseAddress"
+            Value   = "{{ standaloneDirHostName }}"
             NonHttp = $true
         }
         @{
-            Name  = "InternalApiClient:Organisations:BaseAddress"
-            Value = "{{ standaloneOrgHostName }}"
+            Name    = "InternalApiClient:Organisations:BaseAddress"
+            Value   = "{{ standaloneOrgHostName }}"
             NonHttp = $true
         }
         @{
-            Name  = "InternalApiClient:Search:BaseAddress"
-            Value = "{{ standaloneSchHostName }}"
+            Name    = "InternalApiClient:Search:BaseAddress"
+            Value   = "{{ standaloneSchHostName }}"
             NonHttp = $true
         }
     )
 
-    # .NET on MacOS requires a proxy to workaround lack of support for TLS version.
-    if ($IsMacOS) {
-        Set-DsiUserSecret `
-            -Name "InternalApiClient:UseProxy" `
-            -Value "true"
+    Set-DsiUserSecret `
+        -Name "InternalApiClient:UseProxy" `
+        -Value "true"
 
-        Set-DsiUserSecret `
-            -Name "InternalApiClient:ProxyUrl" `
-            -Value "http://localhost:8080"
-    }
-    else {
-        Set-DsiUserSecret `
-            -Name "InternalApiClient:UseProxy" `
-            -Value "false"
-    }
+    Set-DsiUserSecret `
+        -Name "InternalApiClient:ProxyUrl" `
+        -Value "http://localhost:8080"
 }
